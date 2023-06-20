@@ -39,7 +39,7 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
 import os
-os.chdir('/content/conent1/client_secrets.json')
+os.chdir('/content/client_secrets.json')
 CLIENT_SECRETS_FILE = "client_secrets.json"
 
 # This OAuth 2.0 access scope allows an application to upload files to the
