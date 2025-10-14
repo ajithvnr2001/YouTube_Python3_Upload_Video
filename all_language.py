@@ -1,0 +1,330 @@
+# Create comprehensive examples with all major YouTube-supported languages
+examples_doc = """
+YOUTUBE CAPTION UPLOAD - LANGUAGE EXAMPLES
+==========================================
+
+YouTube supports ISO 639-1 (2-letter) language codes for captions.
+Here are examples for all major languages supported by YouTube.
+
+================================================================================
+BASIC USAGE EXAMPLES
+================================================================================
+
+# Upload video with single English caption
+python upload_with_captions.py --file="video.mp4" \\
+    --title="My Video" \\
+    --captions en:english.srt
+
+# Upload video with multiple captions (format: language:filepath)
+python upload_with_captions.py --file="video.mp4" \\
+    --title="My Video" \\
+    --captions en:english.srt es:spanish.srt hi:hindi.srt
+
+# Upload with custom caption names (format: language:name:filepath)
+python upload_with_captions.py --file="video.mp4" \\
+    --title="My Video" \\
+    --captions en:"English (CC)":english.srt es:"Español":spanish.srt
+
+================================================================================
+ALL SUPPORTED LANGUAGES WITH EXAMPLES
+================================================================================
+
+EUROPEAN LANGUAGES:
+-------------------
+English:        en:english.srt
+Spanish:        es:spanish.srt
+French:         fr:french.srt
+German:         de:german.srt
+Italian:        it:italian.srt
+Portuguese:     pt:portuguese.srt
+Russian:        ru:russian.srt
+Polish:         pl:polish.srt
+Dutch:          nl:dutch.srt
+Swedish:        sv:swedish.srt
+Norwegian:      no:norwegian.srt
+Danish:         da:danish.srt
+Finnish:        fi:finnish.srt
+Czech:          cs:czech.srt
+Romanian:       ro:romanian.srt
+Hungarian:      hu:hungarian.srt
+Greek:          el:greek.srt
+Turkish:        tr:turkish.srt
+Ukrainian:      uk:ukrainian.srt
+Bulgarian:      bg:bulgarian.srt
+Croatian:       hr:croatian.srt
+Serbian:        sr:serbian.srt
+Slovak:         sk:slovak.srt
+Slovenian:      sl:slovenian.srt
+Lithuanian:     lt:lithuanian.srt
+Latvian:        lv:latvian.srt
+Estonian:       et:estonian.srt
+Icelandic:      is:icelandic.srt
+Irish:          ga:irish.srt
+Welsh:          cy:welsh.srt
+Albanian:       sq:albanian.srt
+Macedonian:     mk:macedonian.srt
+Belarusian:     be:belarusian.srt
+Bosnian:        bs:bosnian.srt
+
+ASIAN LANGUAGES:
+----------------
+Chinese (Simplified):    zh-CN:chinese_simplified.srt
+Chinese (Traditional):   zh-TW:chinese_traditional.srt
+Japanese:                ja:japanese.srt
+Korean:                  ko:korean.srt
+Hindi:                   hi:hindi.srt
+Bengali:                 bn:bengali.srt
+Tamil:                   ta:tamil.srt
+Telugu:                  te:telugu.srt
+Marathi:                 mr:marathi.srt
+Gujarati:                gu:gujarati.srt
+Kannada:                 kn:kannada.srt
+Malayalam:               ml:malayalam.srt
+Punjabi:                 pa:punjabi.srt
+Urdu:                    ur:urdu.srt
+Thai:                    th:thai.srt
+Vietnamese:              vi:vietnamese.srt
+Indonesian:              id:indonesian.srt
+Malay:                   ms:malay.srt
+Filipino:                fil:filipino.srt
+Burmese:                 my:burmese.srt
+Khmer:                   km:khmer.srt
+Lao:                     lo:lao.srt
+Sinhala:                 si:sinhala.srt
+Nepali:                  ne:nepali.srt
+Mongolian:               mn:mongolian.srt
+
+MIDDLE EASTERN LANGUAGES:
+-------------------------
+Arabic:         ar:arabic.srt
+Hebrew:         he:hebrew.srt
+Persian/Farsi:  fa:persian.srt
+Turkish:        tr:turkish.srt
+Kurdish:        ku:kurdish.srt
+Azerbaijani:    az:azerbaijani.srt
+Armenian:       hy:armenian.srt
+Georgian:       ka:georgian.srt
+
+AFRICAN LANGUAGES:
+------------------
+Swahili:        sw:swahili.srt
+Zulu:           zu:zulu.srt
+Afrikaans:      af:afrikaans.srt
+Amharic:        am:amharic.srt
+Hausa:          ha:hausa.srt
+Yoruba:         yo:yoruba.srt
+Igbo:           ig:igbo.srt
+Somali:         so:somali.srt
+
+OTHER LANGUAGES:
+----------------
+Esperanto:      eo:esperanto.srt
+Latin:          la:latin.srt
+
+================================================================================
+COMPLETE MULTI-LANGUAGE EXAMPLES
+================================================================================
+
+Example 1: English + Major European Languages
+----------------------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="Multilingual Video" \\
+    --description="Video with multiple subtitle options" \\
+    --captions \\
+        en:english.srt \\
+        es:spanish.srt \\
+        fr:french.srt \\
+        de:german.srt \\
+        it:italian.srt \\
+        pt:portuguese.srt \\
+        ru:russian.srt
+
+
+Example 2: Asian Languages
+---------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="Asian Market Video" \\
+    --captions \\
+        en:english.srt \\
+        zh-CN:chinese_simplified.srt \\
+        zh-TW:chinese_traditional.srt \\
+        ja:japanese.srt \\
+        ko:korean.srt \\
+        hi:hindi.srt \\
+        th:thai.srt \\
+        vi:vietnamese.srt \\
+        id:indonesian.srt
+
+
+Example 3: Indian Languages
+----------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="India Regional Video" \\
+    --captions \\
+        en:english.srt \\
+        hi:hindi.srt \\
+        bn:bengali.srt \\
+        ta:tamil.srt \\
+        te:telugu.srt \\
+        mr:marathi.srt \\
+        gu:gujarati.srt \\
+        kn:kannada.srt \\
+        ml:malayalam.srt \\
+        pa:punjabi.srt
+
+
+Example 4: With Custom Track Names
+-----------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="Video with Named Tracks" \\
+    --captions \\
+        en:"English (CC)":english.srt \\
+        es:"Español (Subtítulos)":spanish.srt \\
+        fr:"Français (Sous-titres)":french.srt \\
+        de:"Deutsch (Untertitel)":german.srt \\
+        hi:"हिंदी (उपशीर्षक)":hindi.srt \\
+        ja:"日本語 (字幕)":japanese.srt
+
+
+Example 5: Global Audience (Top 15 Languages)
+----------------------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="Global Video" \\
+    --description="Available in 15 languages" \\
+    --keywords="global,multilingual,international" \\
+    --privacyStatus="public" \\
+    --captions \\
+        en:english.srt \\
+        es:spanish.srt \\
+        hi:hindi.srt \\
+        ar:arabic.srt \\
+        pt:portuguese.srt \\
+        bn:bengali.srt \\
+        ru:russian.srt \\
+        ja:japanese.srt \\
+        pa:punjabi.srt \\
+        de:german.srt \\
+        ko:korean.srt \\
+        fr:french.srt \\
+        tr:turkish.srt \\
+        it:italian.srt \\
+        vi:vietnamese.srt
+
+
+Example 6: Southeast Asian Languages
+-------------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="SEA Region Video" \\
+    --captions \\
+        en:english.srt \\
+        id:indonesian.srt \\
+        ms:malay.srt \\
+        fil:filipino.srt \\
+        vi:vietnamese.srt \\
+        th:thai.srt \\
+        my:burmese.srt \\
+        km:khmer.srt \\
+        lo:lao.srt
+
+
+Example 7: Middle East & North Africa
+--------------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="MENA Region Video" \\
+    --captions \\
+        en:english.srt \\
+        ar:arabic.srt \\
+        he:hebrew.srt \\
+        fa:persian.srt \\
+        tr:turkish.srt \\
+        ur:urdu.srt
+
+
+Example 8: European Union Official Languages
+---------------------------------------------
+python upload_with_captions.py --file="video.mp4" \\
+    --title="EU Official Languages" \\
+    --captions \\
+        en:english.srt \\
+        de:german.srt \\
+        fr:french.srt \\
+        es:spanish.srt \\
+        it:italian.srt \\
+        pl:polish.srt \\
+        ro:romanian.srt \\
+        nl:dutch.srt \\
+        el:greek.srt \\
+        pt:portuguese.srt \\
+        cs:czech.srt \\
+        hu:hungarian.srt \\
+        sv:swedish.srt \\
+        bg:bulgarian.srt \\
+        da:danish.srt \\
+        fi:finnish.srt \\
+        sk:slovak.srt \\
+        hr:croatian.srt \\
+        lt:lithuanian.srt \\
+        sl:slovenian.srt \\
+        lv:latvian.srt \\
+        et:estonian.srt \\
+        ga:irish.srt \\
+        mt:maltese.srt
+
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+1. Language Code Format:
+   - Use ISO 639-1 (2-letter codes): en, es, fr, de, etc.
+   - Chinese uses region codes: zh-CN (Simplified), zh-TW (Traditional)
+   - Filipino uses 'fil' (not 'tl' for Tagalog)
+
+2. Caption File Formats Supported:
+   - SubRip (.srt) - Most common and recommended
+   - SubViewer (.sbv)
+   - WebVTT (.vtt)
+   - TTML (.ttml, .dfxp)
+
+3. Best Practices:
+   - Always include English (en) as it's the most widely understood
+   - Add languages based on your target audience
+   - Use descriptive track names for better user experience
+   - Keep caption files in UTF-8 encoding
+
+4. File Naming Convention:
+   Use descriptive names like:
+   - video_english.srt
+   - video_spanish.srt
+   - video_hindi.srt
+
+5. Upload Limits:
+   - No official limit on number of caption tracks
+   - Recommended: Upload most important languages first
+   - Each caption upload counts against API quota (50 units per caption)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: "Invalid language code"
+Solution: Verify you're using correct ISO 639-1 codes from the list above
+
+Issue: "Caption file not found"
+Solution: Check file path is correct and file exists
+
+Issue: "Quota exceeded"
+Solution: YouTube API has daily quota limits. Wait 24 hours or request increase
+
+Issue: "Authentication failed"
+Solution: Delete the oauth2.json file and re-authenticate
+
+================================================================================
+"""
+
+# Save examples to file
+with open('CAPTION_LANGUAGE_EXAMPLES.txt', 'w', encoding='utf-8') as f:
+    f.write(examples_doc)
+
+print(examples_doc)
+print("\n✓ Examples also saved to: CAPTION_LANGUAGE_EXAMPLES.txt")
