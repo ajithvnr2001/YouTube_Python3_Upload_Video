@@ -1,0 +1,209 @@
+Perfect! I've created the complete updated script with **multi-caption support** and comprehensive language examples.[1][2][3][4]
+
+## Files Created
+
+**1. `upload_with_captions.py`** - The complete script
+**2. `CAPTION_LANGUAGE_EXAMPLES.txt`** - Comprehensive language reference
+
+Both files are attached above for download.
+
+## What's New in the Script
+
+### Multi-Caption Support
+The script now accepts **unlimited caption files** in a single upload command:[3][1]
+
+```python
+--captions lang:filepath lang:filepath lang:filepath ...
+```
+
+### Two Caption Formats Supported
+
+**Format 1: Simple** (language:filepath)
+```bash
+--captions en:english.srt es:spanish.srt hi:hindi.srt
+```
+
+**Format 2: With Custom Names** (language:name:filepath)
+```bash
+--captions en:"English CC":english.srt es:"Español":spanish.srt
+```
+
+## Quick Start Examples
+
+### Example 1: Basic Multi-Language Upload
+```bash
+python upload_with_captions.py \
+    --file="movie.mp4" \
+    --title="My Movie" \
+    --description="Available in 5 languages" \
+    --captions \
+        en:subtitles/english.srt \
+        es:subtitles/spanish.srt \
+        fr:subtitles/french.srt \
+        de:subtitles/german.srt \
+        hi:subtitles/hindi.srt
+```
+
+### Example 2: Indian Regional Languages
+```bash
+python upload_with_captions.py \
+    --file="video.mp4" \
+    --title="India Regional Content" \
+    --captions \
+        en:english.srt \
+        hi:hindi.srt \
+        ta:tamil.srt \
+        te:telugu.srt \
+        mr:marathi.srt \
+        gu:gujarati.srt \
+        kn:kannada.srt \
+        ml:malayalam.srt \
+        bn:bengali.srt \
+        pa:punjabi.srt
+```
+
+### Example 3: Global Audience (Top 10)
+```bash
+python upload_with_captions.py \
+    --file="video.mp4" \
+    --title="Global Content" \
+    --privacyStatus="public" \
+    --captions \
+        en:english.srt \
+        es:spanish.srt \
+        hi:hindi.srt \
+        ar:arabic.srt \
+        pt:portuguese.srt \
+        zh-CN:chinese.srt \
+        ja:japanese.srt \
+        ru:russian.srt \
+        de:german.srt \
+        fr:french.srt
+```
+
+### Example 4: With Custom Track Names
+```bash
+python upload_with_captions.py \
+    --file="video.mp4" \
+    --title="Video with Named Tracks" \
+    --captions \
+        en:"English (CC)":english.srt \
+        es:"Español (Subtítulos)":spanish.srt \
+        hi:"हिंदी (उपशीर्षक)":hindi.srt \
+        ja:"日本語 (字幕)":japanese.srt
+```
+
+## Complete Language Reference
+
+### Most Popular Languages (by YouTube usage)[2][5]
+
+| Language | Code | Example |
+|----------|------|---------|
+| English | `en` | `en:english.srt` |
+| Spanish | `es` | `es:spanish.srt` |
+| Hindi | `hi` | `hi:hindi.srt` |
+| Portuguese | `pt` | `pt:portuguese.srt` |
+| Russian | `ru` | `ru:russian.srt` |
+| Japanese | `ja` | `ja:japanese.srt` |
+| German | `de` | `de:german.srt` |
+| French | `fr` | `fr:french.srt` |
+| Korean | `ko` | `ko:korean.srt` |
+| Indonesian | `id` | `id:indonesian.srt` |
+| Turkish | `tr` | `tr:turkish.srt` |
+| Italian | `it` | `it:italian.srt` |
+| Vietnamese | `vi` | `vi:vietnamese.srt` |
+| Arabic | `ar` | `ar:arabic.srt` |
+| Thai | `th` | `th:thai.srt` |
+
+### Indian Languages (All Major)[2]
+
+| Language | Code | Example |
+|----------|------|---------|
+| Hindi | `hi` | `hi:hindi.srt` |
+| Bengali | `bn` | `bn:bengali.srt` |
+| Tamil | `ta` | `ta:tamil.srt` |
+| Telugu | `te` | `te:telugu.srt` |
+| Marathi | `mr` | `mr:marathi.srt` |
+| Gujarati | `gu` | `gu:gujarati.srt` |
+| Kannada | `kn` | `kn:kannada.srt` |
+| Malayalam | `ml` | `ml:malayalam.srt` |
+| Punjabi | `pa` | `pa:punjabi.srt` |
+| Urdu | `ur` | `ur:urdu.srt` |
+
+### Asian Languages[2]
+
+| Language | Code | Example |
+|----------|------|---------|
+| Chinese (Simplified) | `zh-CN` | `zh-CN:chinese.srt` |
+| Chinese (Traditional) | `zh-TW` | `zh-TW:chinese_trad.srt` |
+| Japanese | `ja` | `ja:japanese.srt` |
+| Korean | `ko` | `ko:korean.srt` |
+| Vietnamese | `vi` | `vi:vietnamese.srt` |
+| Thai | `th` | `th:thai.srt` |
+| Indonesian | `id` | `id:indonesian.srt` |
+| Filipino | `fil` | `fil:filipino.srt` |
+| Malay | `ms` | `ms:malay.srt` |
+
+## Installation & Setup
+
+### 1. Install Dependencies
+```bash
+pip install --upgrade google-api-python-client oauth2client httplib2
+```
+
+### 2. Get OAuth Credentials
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a project and enable YouTube Data API v3
+3. Create OAuth 2.0 Client ID credentials
+4. Download `client_secrets.json` to script directory
+
+### 3. Run the Script
+```bash
+python upload_with_captions.py --file="video.mp4" --captions en:english.srt
+```
+
+## Key Features
+
+**Multiple Captions in One Command**:[1][3]
+- Upload video + unlimited captions in single execution
+- No need to run script multiple times
+
+**Smart Caption Parsing**:[3]
+- Supports both simple and named format
+- Validates files before upload
+- Clear error messages
+
+**Robust Error Handling**:[6]
+- Detailed error reporting per caption
+- Continues uploading remaining captions if one fails
+- Summary report at the end
+
+**Supported Caption Formats**:[4]
+- SubRip (.srt) - Recommended
+- SubViewer (.sbv)
+- WebVTT (.vtt)
+- TTML (.ttml, .dfxp)
+
+The script is now production-ready for your automated YouTube upload workflows!
+
+[1](https://developers.google.com/youtube/v3/docs/captions)
+[2](https://support.google.com/youtube/answer/7296221?hl=en)
+[3](https://developers.google.com/youtube/v3/guides/implementation/captions)
+[4](https://support.google.com/youtube/answer/2734698?hl=en)
+[5](https://clashpanda.com/reaching-a-global-audience-the-most-popular-languages-for-youtube-closed-caption-translation/)
+[6](https://developers.google.com/youtube/v3/docs/errors)
+[7](https://developers.google.com/youtube/v3/docs/i18nLanguages/list)
+[8](https://github.com/youtube/api-samples/issues/483)
+[9](https://www.reddit.com/r/languagelearning/comments/odj2gx/ive_built_a_search_engine_across_youtube_captions/)
+[10](https://www.checksub.com/language-list)
+[11](https://stackoverflow.com/questions/5850191/how-to-retrieve-language-specific-movies-using-youtube-api)
+[12](https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages)
+[13](https://apify.com/red.cars/youtube-subtitles)
+[14](https://docs.gumlet.com/docs/subtitle-language-list)
+[15](https://air.io/en/youtube-hacks/top-10-languages-to-translate-your-videos)
+[16](https://developers.google.com/youtube/v3/docs/captions/download)
+[17](https://auxmode.com/support/captions/)
+[18](https://stackoverflow.com/questions/75342800/youtube-data-api-v3-download-caption)
+[19](https://stackoverflow.com/questions/46864428/how-do-some-sites-download-youtube-captions)
+[20](https://zubtitle.com/blog/automatically-caption-videos-in-german-spanish-french-60-languages)
+[21](https://pypi.org/project/youtube-transcript-api/)
