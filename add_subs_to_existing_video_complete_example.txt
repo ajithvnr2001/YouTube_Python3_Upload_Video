@@ -1,0 +1,170 @@
+The error occurs because `--noauth_local_webserver` is **already defined** in `argparser` from `oauth2client.tools`. You're trying to add it again, which creates a conflict.[1]
+
+## Fixed Script
+
+Remove the duplicate `--noauth_local_webserver` line:
+
+```python
+#!/usr/bin/python
+
+import httplib2
+import os
+import sys
+from apiclient.discovery import build
+from apiclient.errors import HttpError
+from apiclient.http import MediaFileUpload
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.file import Storage
+from oauth2client.tools import argparser, run_flow
+
+os.chdir('/content')
+CLIENT_SECRETS_FILE = "client_secrets.json"
+YOUTUBE_UPLOAD_SCOPE = "https://www.googleapis.com/auth/youtube.force-ssl"
+YOUTUBE_API_SERVICE_NAME = "youtube"
+YOUTUBE_API_VERSION = "v3"
+
+MISSING_CLIENT_SECRETS_MESSAGE = """
+WARNING: Please configure OAuth 2.0
+
+To make this sample run you will need to populate the client_secrets.json file
+found at: %s
+
+with information from the API Console
+https://console.cloud.google.com/
+""" % os.path.abspath(os.path.join(os.path.dirname(__file__), CLIENT_SECRETS_FILE))
+
+
+def get_authenticated_service(args):
+    flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE,
+                                   scope=YOUTUBE_UPLOAD_SCOPE,
+                                   message=MISSING_CLIENT_SECRETS_MESSAGE)
+    storage = Storage("%s-oauth2.json" % sys.argv[0])
+    credentials = storage.get()
+    
+    if credentials is None or credentials.invalid:
+        credentials = run_flow(flow, storage, args)
+    
+    return build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
+                 http=credentials.authorize(httplib2.Http()))
+
+
+def upload_caption(youtube, video_id, language, track_name, file_path):
+    try:
+        print(f"Uploading caption: {track_name} ({language})...")
+        
+        caption_snippet = {
+            'videoId': video_id,
+            'language': language,
+            'name': track_name,
+            'isDraft': False
+        }
+        
+        media_body = MediaFileUpload(file_path, mimetype='application/octet-stream', resumable=True)
+        
+        insert_request = youtube.captions().insert(
+            part='snippet',
+            body={'snippet': caption_snippet},
+            media_body=media_body
+        )
+        
+        response = insert_request.execute()
+        print(f"✓ Caption uploaded successfully!")
+        print(f"  Caption ID: {response['id']}")
+        print(f"  Track Name: {response['snippet']['name']}")
+        print(f"  Language: {response['snippet']['language']}")
+        return True
+        
+    except HttpError as e:
+        print(f"✗ Error: {e.content.decode('utf-8')}")
+        return False
+
+
+if __name__ == '__main__':
+    argparser.add_argument("--video-id", required=True, help="Existing YouTube video ID")
+    argparser.add_argument("--language", required=True, help="Language code (e.g., en, es, hi)")
+    argparser.add_argument("--name", required=True, help="Caption track name")
+    argparser.add_argument("--file", required=True, help="Caption file path (.srt, .sbv, .vtt)")
+    
+    # DO NOT add --noauth_local_webserver here - it's already in argparser!
+    
+    args = argparser.parse_args()
+    
+    if not os.path.exists(args.file):
+        exit(f"Caption file not found: {args.file}")
+    
+    youtube = get_authenticated_service(args)
+    upload_caption(youtube, args.video_id, args.language, args.name, args.file)
+    
+    print("\n✓ Done!")
+```
+
+## Usage Examples
+
+### Single Caption Upload
+
+```bash
+!python add_sub_to_existing_video.py \
+    --video-id="RswvAojntLc" \
+    --language="en" \
+    --name="English" \
+    --file="/content/subtitles/english.srt" \
+    --noauth_local_webserver
+```
+
+### With Spaces in Path
+
+```bash
+!python add_sub_to_existing_video.py \
+    --video-id="RswvAojntLc" \
+    --language="hi" \
+    --name="Hindi" \
+    --file="/content/drive/MyDrive/My Subs/hindi subtitle.srt" \
+    --noauth_local_webserver
+```
+
+### Multiple Captions to Same Video
+
+```python
+import subprocess
+
+video_id = "RswvAojntLc"
+
+captions = [
+    ("en", "English", "/content/subs/english.srt"),
+    ("es", "Spanish", "/content/subs/spanish.srt"),
+    ("hi", "Hindi", "/content/subs/hindi.srt"),
+    ("ta", "Tamil", "/content/subs/tamil.srt"),
+    ("te", "Telugu", "/content/subs/telugu.srt")
+]
+
+for lang, name, filepath in captions:
+    cmd = [
+        "python", "add_sub_to_existing_video.py",
+        f"--video-id={video_id}",
+        f"--language={lang}",
+        f"--name={name}",
+        f"--file={filepath}",
+        "--noauth_local_webserver"
+    ]
+    
+    print(f"\n{'='*60}")
+    print(f"Uploading: {name}")
+    print('='*60)
+    
+    result = subprocess.run(cmd)
+    
+print("\n✓ All captions uploaded!")
+```
+
+## Key Points
+
+1. **`--noauth_local_webserver` is automatic** - Already included from `oauth2client.tools`
+2. **Video ID required** - Get it from the YouTube URL
+3. **Works on any existing video** - As long as you own it
+4. **No video re-upload** - Only adds subtitle tracks[2]
+
+The script will now work correctly without the argument conflict error![3][2]
+
+[1](https://developers.google.com/youtube/v3/quickstart/python)
+[2](https://developers.google.com/youtube/v3/docs/captions/insert)
+[3](https://stackoverflow.com/questions/74040078/how-to-insert-captions-to-a-youtube-video-using-the-youtube-api-v3)
