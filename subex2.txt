@@ -1,0 +1,245 @@
+Great question! Here are comprehensive examples showing exactly how to specify file paths for both videos and captions in different scenarios.
+
+## File Path Syntax Examples
+
+### Basic Syntax Rules
+
+**Video file**: Use `--file="path/to/video"`
+**Caption files**: Use `--captions lang:path/to/caption.srt`
+
+**Important**: Always use quotes around paths that contain spaces!
+
+---
+
+## Example 1: Files in Same Directory as Script
+
+If your files are in the same folder as the script:
+
+```bash
+python upload_with_captions.py \
+    --file="video.mp4" \
+    --title="My Video" \
+    --captions en:english.srt es:spanish.srt hi:hindi.srt
+```
+
+***
+
+## Example 2: Files in Subdirectories (Relative Paths)
+
+If your files are organized in folders:
+
+```bash
+python upload_with_captions.py \
+    --file="videos/movie.mp4" \
+    --title="Movie with Subtitles" \
+    --captions \
+        en:subtitles/english.srt \
+        es:subtitles/spanish.srt \
+        hi:subtitles/hindi.srt
+```
+
+Or with different folder structures:
+
+```bash
+python upload_with_captions.py \
+    --file="content/videos/final_video.mp4" \
+    --captions \
+        en:content/subs/eng/english.srt \
+        es:content/subs/spa/spanish.srt
+```
+
+***
+
+## Example 3: Absolute Paths (Linux/macOS)
+
+Using full system paths on Linux or macOS:
+
+```bash
+python upload_with_captions.py \
+    --file="/home/username/Videos/movie.mp4" \
+    --title="My Movie" \
+    --captions \
+        en:/home/username/Subtitles/english.srt \
+        es:/home/username/Subtitles/spanish.srt \
+        hi:/home/username/Subtitles/hindi.srt
+```
+
+***
+
+## Example 4: Absolute Paths (Windows)
+
+Using full system paths on Windows:
+
+```bash
+python upload_with_captions.py \
+    --file="C:\Users\YourName\Videos\movie.mp4" \
+    --title="My Movie" \
+    --captions \
+        en:C:\Users\YourName\Subtitles\english.srt \
+        es:C:\Users\YourName\Subtitles\spanish.srt \
+        hi:C:\Users\YourName\Subtitles\hindi.srt
+```
+
+Or using forward slashes (also works on Windows):
+
+```bash
+python upload_with_captions.py \
+    --file="C:/Users/YourName/Videos/movie.mp4" \
+    --captions \
+        en:C:/Users/YourName/Subtitles/english.srt \
+        es:C:/Users/YourName/Subtitles/spanish.srt
+```
+
+***
+
+## Example 5: Paths with Spaces (IMPORTANT!)
+
+When your filenames or folders contain spaces, **always use quotes**:
+
+```bash
+python upload_with_captions.py \
+    --file="My Videos/Summer Vacation 2024.mp4" \
+    --title="Summer Vacation" \
+    --captions \
+        en:"My Subtitles/English Captions.srt" \
+        es:"My Subtitles/Spanish Captions.srt"
+```
+
+Windows with spaces:
+
+```bash
+python upload_with_captions.py \
+    --file="C:\Users\John Doe\My Videos\movie.mp4" \
+    --captions \
+        en:"C:\Users\John Doe\Subtitles\English CC.srt"
+```
+
+***
+
+## Example 6: Mixed Paths (Different Locations)
+
+You can mix absolute and relative paths:
+
+```bash
+python upload_with_captions.py \
+    --file="/home/user/projects/video.mp4" \
+    --captions \
+        en:subtitles/english.srt \
+        es:/home/user/downloads/spanish.srt \
+        hi:../shared/hindi.srt
+```
+
+***
+
+## Example 7: Real-World India Content Example
+
+Complete example with typical folder structure:
+
+```bash
+python upload_with_captions.py \
+    --file="uploads/hindi_movie_2024.mkv" \
+    --title="Hindi Movie 2024" \
+    --description="Full HD with multiple subtitles" \
+    --keywords="hindi,movie,2024" \
+    --privacyStatus="public" \
+    --captions \
+        en:subs/hindi_movie_english.srt \
+        hi:subs/hindi_movie_hindi.srt \
+        ta:subs/hindi_movie_tamil.srt \
+        te:subs/hindi_movie_telugu.srt \
+        mr:subs/hindi_movie_marathi.srt
+```
+
+***
+
+## Example 8: Custom Track Names with Paths
+
+Using custom names with file paths:
+
+```bash
+python upload_with_captions.py \
+    --file="videos/movie.mp4" \
+    --captions \
+        en:"English CC":subtitles/eng.srt \
+        es:"Español (Subtítulos)":subtitles/spa.srt \
+        hi:"हिंदी (उपशीर्षक)":subtitles/hin.srt
+```
+
+***
+
+## Example 9: Current Directory Reference
+
+Using `.` for current directory:
+
+```bash
+python upload_with_captions.py \
+    --file="./video.mp4" \
+    --captions \
+        en:./english.srt \
+        es:./spanish.srt
+```
+
+***
+
+## Example 10: Parent Directory Reference
+
+Using `..` to go up one directory level:
+
+```bash
+python upload_with_captions.py \
+    --file="../videos/movie.mp4" \
+    --captions \
+        en:../subtitles/english.srt \
+        es:../subtitles/spanish.srt
+```
+
+***
+
+## Common Path Patterns Summary
+
+| Scenario | Video Path Example | Caption Path Example |
+|----------|-------------------|---------------------|
+| Same folder | `--file="video.mp4"` | `en:subtitle.srt` |
+| Subfolder | `--file="videos/video.mp4"` | `en:subs/subtitle.srt` |
+| With spaces | `--file="My Videos/video.mp4"` | `en:"My Subs/subtitle.srt"` |
+| Linux absolute | `--file="/home/user/video.mp4"` | `en:/home/user/sub.srt` |
+| Windows absolute | `--file="C:\Videos\video.mp4"` | `en:C:\Subs\sub.srt` |
+| Parent directory | `--file="../video.mp4"` | `en:../subtitle.srt` |
+
+***
+
+## Tips for File Paths
+
+1. **Use forward slashes (`/`)** - Works on all platforms (Windows, Linux, macOS)
+2. **Always quote paths with spaces** - Use `"path with spaces/file.mp4"`
+3. **Relative paths are simpler** - Easier to move your project around
+4. **Test file existence first** - Script will show error if file not found
+5. **Use tab completion** - In terminal, press Tab to autocomplete paths
+
+***
+
+## Quick Test Command
+
+To quickly test if your paths are correct:
+
+```bash
+# Check if files exist (Linux/macOS)
+ls -l "path/to/video.mp4"
+ls -l "path/to/subtitle.srt"
+
+# Check if files exist (Windows)
+dir "path\to\video.mp4"
+dir "path\to\subtitle.srt"
+```
+
+These examples cover all common scenarios you'll encounter when specifying file paths for your video and subtitle uploads!
+
+[1](https://developers.google.com/youtube/v3/guides/uploading_a_video)
+[2](https://www.youtube.com/watch?v=IqA1J374VTQ)
+[3](https://stackoverflow.com/questions/36962260/batch-upload-videos-to-youtube-via-command-line-python)
+[4](https://github.com/pillargg/youtube-upload)
+[5](https://github.com/linouk23/youtube_uploader_selenium)
+[6](https://www.youtube.com/watch?v=p0Cy0LQ-sLw)
+[7](https://www.youtube.com/watch?v=Pr0tC-6hh44)
+[8](https://python.plainenglish.io/uploading-videos-to-youtube-using-python-and-oauth-2-0-a-step-by-step-guide-with-reauthentication-fea2602e6f3d)
+[9](https://www.youtube.com/watch?v=xCYdddQrVV0)
